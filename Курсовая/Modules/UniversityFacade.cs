@@ -30,15 +30,11 @@ namespace Курсовая.Modules
             Universities.Add(univer2);
         }
 
-            public List<Universitet> SearchByCity(string city)
+            public List<Universitet> Search(string keyword)
         {
-            return Universities.Where(u => u.City.ToLower().Contains(city.ToLower())).ToList();
-        }
-        public List<Specialty> SearchBySpecialty(string SpecialtyName)
-        {
-            return Universities.SelectMany(u => u.Specialties)
-            .Where(s => s.Name.ToLower().Contains(SpecialtyName.ToLower()))
-            .ToList();
+        return universities.Where(u =>
+            u.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+            u.Specialty.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
         }
         }
     }
