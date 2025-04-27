@@ -11,24 +11,22 @@ namespace Курсовая.Modules
         public string Name { get; set; }
         public string Code { get; set; }
         public string Description { get; set; } = "No description yet";
-        public int Competition { get; set; }
+        public int DayTimeCompetition { get; set; }
+        public int DistantCompetition { get; set; }
         public int Price { get; set; }
 
-        public Specialty(string name,string code,int competition, int price) 
+        public Specialty(string name,string code,int daytimeCompetition,int distantCompetition, int price) 
         {
             Name = name;
             Code = code;
-            Competition = competition;
+            DayTimeCompetition = daytimeCompetition;
+            DistantCompetition = distantCompetition;
             Price = price;
         }
 
         public override string ToString()
         {
-            return $"Спеціальність: {Name} (Номер:{Code}, Усього місць: {Competition}, Вартість:{Price})";
-        }
-        public double CompetitionPerPlace(int applications)
-        {
-            return applications / (double)TotalPlaces;
+            return $"Спеціальність: {Name} (Номер:{Code}, Усього місць на денну: {DaytimeCompetition},Заочно: {DistantCompetition} Вартість:{Price})";
         }
 
         
