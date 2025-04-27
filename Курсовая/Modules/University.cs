@@ -8,25 +8,21 @@ namespace Курсовая.Modules
 {
     public class University
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string Adress { get; set; }
-        public List<Specialty> Specialties { get; set; } = new List<Specialty>();
+        public List<Specialty> Specialties { get; set; }
         public string PhoneNumber { get; set; }
         
-        public University()
+        public University(string name, string city, string adress, string phoneNumber)
         {
+            Name = name;
+            City = city;
+            Adress = Adress;
+            PhoneNumber = phoneNumber;
             Specialties = new List<Specialty>();
         }
-
-        public void AddSpecialty(Specialty specialty)
-        {
-            if (specialty != null && !Specialties.Contains(specialty))
-            {
-                Specialties.Add(specialty);
-        }
-
+        
         public override string ToString()
         {
             return $"University: {Name}, City: {City}, Adress: {Adress}, Phone: {PhoneNumber}";
