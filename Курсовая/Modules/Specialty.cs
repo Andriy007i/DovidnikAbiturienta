@@ -6,28 +6,31 @@ using System.Threading.Tasks;
 
 namespace Курсовая.Modules
 {
-    internal class Specialty
+    public class Specialty
     {
         public string Name { get; set; }
-        public int BudgetPlaces { get; set; }
-        public int TotalPlaces { get; set; }
-        public decimal StudyCost { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; } = "No description yet";
+        public int Competition { get; set; }
+        public int Price { get; set; }
 
-        public Specialty(string name,int budgetPlaces,int totalPlaces, decimal studyCost) 
+        public Specialty(string name,string code,int competition, int price) 
         {
             Name = name;
-            BudgetPlaces = budgetPlaces;
-            TotalPlaces = totalPlaces;
-            StudyCost = studyCost;
+            Code = code;
+            Competition = competition;
+            Price = price;
+        }
+
+        public override string ToString()
+        {
+            return $"Спеціальність: {Name} (Номер:{Code}, Усього місць: {Competition}, Вартість:{Price})";
         }
         public double CompetitionPerPlace(int applications)
         {
             return applications / (double)TotalPlaces;
         }
 
-        public override string ToString()
-        {
-            return $"{Name} (Бюджет:{BudgetPlaces}, Усього місць: {TotalPlaces}, Вартість:{StudyCost})";
-        }
+        
     }
 }
