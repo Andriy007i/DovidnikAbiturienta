@@ -17,22 +17,55 @@ namespace YourNamespace.Forms
 
         private void btnFindUniversity_Click(object sender, EventArgs e)
         {
-            string name = txtUniversityName.Text;
-            var university = repository.GetUniversityByName(name);
+            lstResults.Items.Clear();
+            var university = repository.GetUniversityByName(txtUniversity.Text);
 
             if(university != null)
             {
-            lstOutPut.Items.Clear();
-            lstOutput.Items.Add($"Назва: {university.Name}");
-            lstOutput.Items.Add($"Адреса: {university.Adress}");
-            lstOutput.Items.Add("Спеціальності:");
-            foreach (var spec in university.Specialties)
-            {
-                lstOutput.Items.Add($"- {spec.Name} (Денна: {spec.DayTimeCompetition}, Вечірня: {spec.EveningTimeCompetition}, Заочна: {spec.DistantCompetition}, Ціна: {spec.Price} грн)");
-            }
-            else{
-            MessageBox.Show("Вуз не знайдено");
+                lstResults.Items.Add(university.ToString());
+                lstOutput.Items.Add("Спеціальності:");
+                foreach (var specialty in university.Specialties)
+                {
+                    lstResults.Items.Add($"- {spec.Name}");
+                }
+                else
+                {
+                    MessageBox.Show("Вуз не знайдено");
+                }
             }
         }
+        private void btnFindSpecialty_Click(object sender, EventArgs e)
+        {
+            lstResults.Items.Clear();
+            var specialties = repository.GetSpecialtiesByName(txtSpecialty.Text);
+
+            if(specialties.Any())
+            {
+                foreach( var specialty in specialties)
+                {
+                    lstResults.Items.Add(specialty.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Спеціальність не знайдено");
+            }
+        }
+        private void btnFindMinimalConpetition_Click(object sender, EventArgs e)
+        {
+            lstResults.Items.Clear();
+            var specialty = repository.GetSpecialtyWithMinimalCompetition(txtSpecialty.Text);
+
+            if(specialty != null)
+            {
+                lstResults.Items.Add($"Спеціальність з мінімальним конкурсом:");
+                lstResults.Items.Add(specialty.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Спеціальність не знайдено");
+            }
+        }
+    }
           
 }
