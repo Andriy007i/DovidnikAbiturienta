@@ -18,7 +18,7 @@ namespace Курсовая.Modules
         }
         private void SeedData()
         {
-            var univer1 = new Universitet("Київський національний університет", "Київ,проспект Перемоги, 37");
+            var univer1 = new Universitet("Київський національний університет", "Київ" ,"проспект Перемоги, 37","+380995485775");
             univer1.Specialties.Add(new Specialty("Комп'ютерні науки",  25000));
             univer1.Specialties.Add(new Specialty("Юридичні науки", 70, 200, 40000));
 
