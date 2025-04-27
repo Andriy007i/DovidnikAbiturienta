@@ -1,72 +1,38 @@
 using System;
 using System.Windows.Forms;
 using System.Linq;
+using Курсовая.Modules;
 
 namespace YourNamespace.Forms
 {
     public partial class MainForm : Form
     {
-        private UniversityFacade universityFacade;
+        private UniversityRepository repository;
 
         public MainForm()
         {
             InitializeComponent();
-            universityFacade = new UniversityFacade();
+            repository = new UniversityRepository();
         }
 
-        private void InitializeComponent()
+        private void btnFindUniversity_Click(object sender, EventArgs e)
         {
-            this.Text = "Пошук університетів";
-            this.Width = 600;
-            this.Height = 300;
+            string name = txtUniversityName.Text;
+            var university = repository.GetUniversityByName(name);
 
-            var textBox = new TextBox
+            if(university != null)
             {
-                Name = "searchBox",
-                Width = 300,
-                Left = 150,
-                Top = 50
-            };
-
-            var searchButton = new Button
+            lstOutPut.Items.Clear();
+            lstOutput.Items.Add($"Назва: {university.Name}");
+            lstOutput.Items.Add($"Адреса: {university.Adress}");
+            lstOutput.Items.Add("Спеціальності:");
+            foreach (var spec in university.Specialties)
             {
-                Text = "Пошук",
-                Left = 250,
-                Top = 100,
-                Width = 100
-            };
-
-            var resultsBox = new ListBox
-            {
-                Name = "resultsBox",
-                Top = 150,
-                Left = 50,
-                Width = 500,
-                Height = 100
-            };
-
-            searchButton.Click += (sender, args) =>
-            {
-                string keyword = textBox.Text;
-                var results = universityFacade.Search(keyword);
-
-                resultsBox.Items.Clear();
-                if (results.Any())
-                {
-                    foreach (var u in results)
-                    {
-                        resultsBox.Items.Add($"{u.Name} — {u.Specialty} — Конкурс: {u.Competition}, Вартість: {u.Tuition} грн");
-                    }
-                }
-                else
-                {
-                    resultsBox.Items.Add("Нічого не знайдено.");
-                }
-            };
-
-            this.Controls.Add(textBox);
-            this.Controls.Add(searchButton);
-            this.Controls.Add(resultsBox);
+                lstOutput.Items.Add($"- {spec.Name} (Денна: {spec.DayTimeCompetition}, Вечірня: {spec.EveningTimeCompetition}, Заочна: {spec.DistantCompetition}, Ціна: {spec.Price} грн)");
+            }
+            else{
+            MessageBox.Show("Вуз не знайдено");
+            }
         }
-    }
+          
 }
