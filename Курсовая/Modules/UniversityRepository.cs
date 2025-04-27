@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Курсовая.Modules
 {
-    internal class UniversityFacade
+    public class UniversityFacade
     {
-        public List<Universitet> Universities { get; private set; }
+        public List<University> Universities { get; private set; }
 
-        public UniversityFacade()
+        public UniversityRepository()
         {
-            Universities = new List<Universitet>();
+            Universities = new List<University>();
             SeedData();
         }
         private void SeedData()
         {
-            var univer1 = new Universitet("Київський національний університет", "Київ");
-            univer1.Specialties.Add(new Specialty("Комп'ютерні науки", 50, 100, 30000));
+            var univer1 = new Universitet("Київський національний університет", "Київ,проспект Перемоги, 37");
+            univer1.Specialties.Add(new Specialty("Комп'ютерні науки",  25000));
             univer1.Specialties.Add(new Specialty("Юридичні науки", 70, 200, 40000));
 
             var univer2 = new Universitet("Харківський національний університет радіоелектроніки", "Харків");
