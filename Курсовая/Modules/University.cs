@@ -9,10 +9,10 @@ namespace Курсовая.Modules
     public class University
     {
         public string Name { get; set; }
-        public string City { get; set; }
-        public string Adress { get; set; }
+        public string City { get; set; } = "No data yet"
+        public string Adress { get; set; } = "No data yet"
         public List<Specialty> Specialties { get; set; }
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = "No data yet"
         
         public University(string name, string city, string adress, string phoneNumber)
         {
